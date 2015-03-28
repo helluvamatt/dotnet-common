@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Async\AsyncRunner.cs" />
+    <Compile Include="Data\Async\BasicResult.cs" />
+    <Compile Include="Data\PathUtils.cs" />
     <Compile Include="Mono.Options\Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrayApplication\OptionsForm.cs">

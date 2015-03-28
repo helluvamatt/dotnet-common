@@ -102,6 +102,8 @@ namespace Common.TrayApplication
 
 		protected abstract string GetApplicationName();
 
+		protected abstract string GetAppDataPath();
+
 		#endregion
 
 		#region Event handlers
