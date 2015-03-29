@@ -75,7 +75,7 @@ namespace Common.TrayApplication
 			}
 		}
 
-		protected void CreateOptionsForm(string openFeed = null)
+		protected void CreateOptionsForm()
 		{
 			if (optionsForm == null)
 			{
