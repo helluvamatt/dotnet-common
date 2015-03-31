@@ -66,6 +66,7 @@ namespace Common.TrayApplication
 			};
 			notifyIcon.ContextMenuStrip.Opening += ContextMenuStrip_Opening;
 			notifyIcon.DoubleClick += notifyIcon_DoubleClick;
+			AppDataFolder = GetAppDataPath();
 
 			OnInitializeContext();
 
