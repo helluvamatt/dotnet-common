@@ -23,48 +23,12 @@ namespace Common.Data
 
 		public Dictionary<string, string> SerializeToHash()
 		{
-			Dictionary<string, string> hash = new Dictionary<string, string>();
-			PropertyInfo[] props = SettingsObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-			JsonSerializerSettings set = new JsonSerializerSettings();
-			set.TypeNameHandling = TypeNameHandling.All;
-			foreach (PropertyInfo prop in props)
-			{
-				if (prop.GetCustomAttributes(typeof(IgnoreSettingAttribute)).Count() < 1)
-				{
-					hash.Add(prop.Name, JsonConvert.SerializeObject(prop.GetValue(SettingsObject), prop.GetType(), set));
-				}
-			}
-			return hash;
+			return ModelSerializer.SerializeModelToHash(SettingsObject);
 		}
 
 		public void DeserializeFromHash(Dictionary<string, string> hash)
 		{
-			PropertyInfo[] props = SettingsObject.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-			JsonSerializerSettings set = new JsonSerializerSettings();
-			set.TypeNameHandling = TypeNameHandling.All;
-			foreach (PropertyInfo prop in props)
-			{
-				if (prop.GetCustomAttributes(typeof(IgnoreSettingAttribute)).Count() < 1)
-				{
-					if (hash.ContainsKey(prop.Name))
-					{
-						object value = JsonConvert.DeserializeObject(hash[prop.Name], set);
-						if (value != null && !prop.PropertyType.IsAssignableFrom(value.GetType()))
-						{
-							value = TypeDescriptor.GetConverter(prop.PropertyType).ConvertFrom(value);
-						}
-						prop.SetValue(SettingsObject, value);
-					}
-					else
-					{
-						var defaultValueAttr = prop.GetCustomAttributes(typeof(DefaultValueAttribute));
-						if (defaultValueAttr.Count() > 0)
-						{
-							prop.SetValue(SettingsObject, ((DefaultValueAttribute)defaultValueAttr.First()).Value);
-						}
-					}
-				}
-			}
+			SettingsObject = (T) ModelSerializer.DeserializeModelFromHash(hash, typeof(T));
 		}
 
 		#region INI file processing

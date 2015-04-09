@@ -56,7 +56,8 @@
     <Compile Include="Data\Async\AsyncRunner.cs" />
     <Compile Include="Data\Async\BasicResult.cs" />
     <Compile Include="Data\Async\TrackedResult.cs" />
-    <Compile Include="Data\IgnoreSettingAttribute.cs" />
+    <Compile Include="Data\SerializeAttribute.cs" />
+    <Compile Include="Data\ModelSerializer.cs" />
     <Compile Include="Data\PathUtils.cs" />
     <Compile Include="Data\SettingsManager.cs" />
     <Compile Include="Mono.Options\Options.cs" />
