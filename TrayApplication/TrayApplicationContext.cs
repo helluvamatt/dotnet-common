@@ -33,7 +33,7 @@ namespace Common.TrayApplication
 		/// <summary>
 		/// 
 		/// </summary>
-		protected SettingsManager<T> SettingsManager { get; set; }
+		protected SettingsManager<T> SettingsManager { get; private set; }
 
 		#endregion
 
@@ -51,6 +51,9 @@ namespace Common.TrayApplication
 
 			// Init logger
 			Logger = LogManager.GetLogger(GetType());
+
+			// Init SettingsManager
+			SettingsManager = new SettingsManager<T>();
 		}
 
 		/// <summary>
@@ -106,7 +109,6 @@ namespace Common.TrayApplication
 
 		protected T LoadSettings(string iniFile)
 		{
-			SettingsManager = new SettingsManager<T>();
 			if (File.Exists(iniFile))
 			{
 				try

@@ -8,14 +8,14 @@ namespace Common.Data.Async
 {
 	public class AsyncRunner<ResultType, StateType>
 	{
-		public async void AsyncRun<TrackedResultType>(Func<StateType, TrackedResultType> func, Action<TrackedResultType> callback, StateType state, int trackedId) where TrackedResultType : TrackedResult, ResultType
+		public async void AsyncRun<TrackedResultType>(Func<StateType, TrackedResultType> func, Action<TrackedResultType> callback, StateType state, int? trackedId) where TrackedResultType : TrackedResult, ResultType
 		{
 			TrackedResultType result = await Task<TrackedResultType>.Factory.StartNew(s => func.Invoke((StateType)s), state);
 			result.ResultId = trackedId;
 			if (callback != null) callback(result);
 		}
 
-		public async void AsyncRun<TrackedResultType>(Func<TrackedResultType> func, Action<TrackedResultType> callback, int trackedId) where TrackedResultType : TrackedResult, ResultType
+		public async void AsyncRun<TrackedResultType>(Func<TrackedResultType> func, Action<TrackedResultType> callback, int? trackedId) where TrackedResultType : TrackedResult, ResultType
 		{
 			TrackedResultType result = await Task<TrackedResultType>.Factory.StartNew(func);
 			result.ResultId = trackedId;
