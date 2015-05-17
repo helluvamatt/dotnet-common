@@ -40,7 +40,7 @@ namespace Common.TrayApplication
 		#region Members
 
 		protected OptionsForm optionsForm = null;
-		protected NotifyIcon notifyIcon;
+		private NotifyIcon notifyIcon;
 		private IContainer components;
 
 		#endregion
@@ -84,7 +84,7 @@ namespace Common.TrayApplication
 		{
 			if (optionsForm == null)
 			{
-				optionsForm = BuildOptionsForm();
+				optionsForm = OnBuildOptionsForm();
 				optionsForm.Icon = ApplicationIcon;
 				optionsForm.Closed += optionsForm_Closed;
 				optionsForm.Show();
@@ -160,16 +160,36 @@ namespace Common.TrayApplication
 
 		#region Abstract interface
 
+		/// <summary>
+		/// Called at some point during application startup. Initial configuration should be started here.
+		/// </summary>
 		protected abstract void OnInitializeContext();
 
-		protected abstract OptionsForm BuildOptionsForm();
+		/// <summary>
+		/// Called when it is necessary to build the options form. This is called whenever the options form needs to be built after is has been closed or the appliation has just started.
+		/// </summary>
+		/// <returns>Some form that extends OptionsForm</returns>
+		protected abstract OptionsForm OnBuildOptionsForm();
 
-		protected abstract void BuildContextMenu();
+		/// <summary>
+		/// Called when it is necessary to build the context menu. This is actually called each time the menu is opened.
+		/// </summary>
+		/// <param name="menu">ContextMenuStrip from the tray icon</param>
+		protected abstract void OnBuildContextMenu(ContextMenuStrip menu);
 
+		/// <summary>
+		/// Override in subclasses to define the appliction icon
+		/// </summary>
 		protected abstract Icon ApplicationIcon { get; }
 
+		/// <summary>
+		/// Override in subclasses to define the application name
+		/// </summary>
 		protected abstract string ApplicationName { get; }
 
+		/// <summary>
+		/// Override in subclasses to define the application data path
+		/// </summary>
 		protected abstract string AppDataPath { get; }
 
 		#endregion
@@ -181,7 +201,7 @@ namespace Common.TrayApplication
 			e.Cancel = false;
 			notifyIcon.ContextMenuStrip.Items.Clear();
 
-			BuildContextMenu();
+			OnBuildContextMenu(notifyIcon.ContextMenuStrip);
 		}
 
 		private void notifyIcon_DoubleClick(object sender, EventArgs e)
