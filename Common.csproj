@@ -84,6 +84,7 @@
     <Compile Include="UI\Hotkeys\HotkeyListItem.Designer.cs">
       <DependentUpon>HotkeyListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Hotkeys\HotkeyManager.cs" />
     <Compile Include="UI\LocalizedDesignAttributes\LocalizedCategoryAttribute.cs" />
     <Compile Include="UI\LocalizedDesignAttributes\LocalizedDescriptionAttribute.cs" />
     <Compile Include="UI\LocalizedDesignAttributes\LocalizedDisplayNameAttribute.cs" />
