@@ -26,6 +26,7 @@ namespace Common.UI.Hotkeys
 		public HotkeyForm()
 		{
 			InitializeComponent();
+			UpdateUI();
 		}
 
 		protected override void OnLoad(EventArgs e)
