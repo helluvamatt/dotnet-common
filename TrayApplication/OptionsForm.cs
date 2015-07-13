@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Common.TrayApplication
 {
-	public abstract class OptionsForm : Form
+	public class OptionsForm : Form
 	{
 		#region OptionChanged event
 
@@ -25,11 +25,10 @@ namespace Common.TrayApplication
 
 		#endregion
 		
-		#region Abstract interface
-		
-		public abstract void PopulateSettings();
-		
-		#endregion
+		public virtual void PopulateSettings()
+		{
+			// Default does nothing
+		}
 	}
 
 	public class OptionChangedEventArgs : EventArgs
