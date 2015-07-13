@@ -85,6 +85,7 @@ namespace Common.TrayApplication
 			if (optionsForm == null)
 			{
 				optionsForm = OnBuildOptionsForm();
+				optionsForm.PopulateSettings();
 				optionsForm.Icon = ApplicationIcon;
 				optionsForm.Closed += optionsForm_Closed;
 				optionsForm.Show();
